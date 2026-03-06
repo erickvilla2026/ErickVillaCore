@@ -13,14 +13,18 @@ namespace ML
         public string? Nombre { get; set; }
         public string? Paterno { get; set; }
         public string? Materno { get; set; }
+        public string? Sexo { get; set; }
+        public string? EstadoNacimiento { get; set; }
 
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
 
-        public int Telefono { get; set; }
+        public string? Telefono { get; set; }
         public string? DireccionActual  { get; set; }
         public string? Municipio { get; set; }
         public string? Colonia { get; set; }
         public string? Calle { get; set; }
         public string? Numero { get; set; }
+
+        public List<object>? Capturas { get; set; }
     }
 }

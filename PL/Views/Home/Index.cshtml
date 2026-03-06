@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ML.Captura
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +8,41 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<table class="table caption-top">
+    <caption>List of users</caption>
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Paterno</th>
+            <th scope="col">Materno</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion Actual</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (ML.Captura captura in Model.Capturas)
+        {
+        <tr>
+            <th scope="row">1</th>
+            <td>@captura.Nombre</td>
+            <td>@captura.Paterno</td>
+            <td>@captura.Materno</td>
+            <td>@captura.FechaNacimiento</td>
+            <td>@captura.Telefono</td>
+            <td>@captura.DireccionActual</td>
+                <td>
+                    @Html.ActionLink("Editar", "Form", "Home", new { Id = captura.Id }, new { @class = "btn btn-success" })
+                </td>
+                <td> @Html.ActionLink("eliminar", "Delete", "Home", new { Id = captura.Id }, new { @class = "btn btn-warning" }) </td>
+        </tr>
+            
+        }
+    </tbody>
+</table>
