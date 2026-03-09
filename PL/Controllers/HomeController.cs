@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Blazor;
 using PL.Models;
 using System.Diagnostics;
 
@@ -57,7 +59,7 @@ namespace PL.Controllers
             captura.Nombre = item.Nombre;
             captura.Paterno = item.Paterno;
             captura.Materno = item.Materno;
-            
+
             return View(captura);
         }
 
@@ -66,7 +68,7 @@ namespace PL.Controllers
 
             ML.Result result = BL.Class1.Delete(Id);
 
-            if(result.Correct)
+            if (result.Correct)
             {
                 Console.WriteLine("se elimino correctamente");
             }
@@ -74,6 +76,60 @@ namespace PL.Controllers
             return RedirectToAction("GetAll");
             //return View();
         }
+
+
+
+        public ActionResult UsuarioGetAll()
+        {
+            ML.Result result = BL.Usuario.GetAll();
+            ML.Usuario usuario = new ML.Usuario();
+
+            usuario.Usuarios = result.Objects; ;
+
+            return View(usuario);
+        }
+
+
+        public static ML.Result UsuarioGetById()
+        {
+            ML.Result result = new ML.Result();
+
+            return result;
+        }
+
+        public ActionResult UsuarioForm(int IdUsuario)
+        {
+
+            ML.Result result = BL.Usuario.GetById(IdUsuario);
+
+            ML.Usuario usuario = new ML.Usuario();
+
+            ML.Usuario item = (ML.Usuario)result.Object;
+            
+            
+                usuario.IdUsuario = item.IdUsuario;
+                usuario.Nombre = item.Nombre;
+                usuario.ApellidoPaterno = item.ApellidoPaterno;
+                usuario.ApellidoMaterno = item.ApellidoMaterno;
+                usuario.Email = item.Email;
+                usuario.UserName = item.UserName;
+                usuario.Password = item.Password;
+                usuario.FechaNacimiento = item.FechaNacimiento; 
+                usuario.Sexo = item.Sexo;
+                usuario.Telefono = item.Telefono;
+                usuario.Celular = item.Celular;
+                usuario.CURP = item.CURP;
+                usuario.Estatus = item.Estatus;
+
+
+            
+
+            return View(usuario);
+        }
+
+
+
+
 
 
 

@@ -44,7 +44,6 @@ namespace BL
             {
 
                 var getById = context.Capturas
-                                              .FromSqlInterpolated($"EXEC CapGetById {Id}")
                                               .AsEnumerable()
                                               .FirstOrDefault();
                 var item = getById;

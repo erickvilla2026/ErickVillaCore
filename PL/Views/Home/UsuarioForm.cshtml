@@ -1,0 +1,77 @@
+﻿@model ML.Usuario
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+
+@using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.IdUsuario)
+        @Html.TextBoxFor(m => m.IdUsuario, new { @class = "form-control" })
+    </div>
+    <div class="row">
+        <div class="col-md-4 form-group ">
+            @Html.LabelFor(m => m.Nombre)
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", onkeypress = "ValidarTexto(event, this)" })
+        </div>
+
+        @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+
+        <div class="col-md-4 form-group ">
+            @Html.LabelFor(m => m.ApellidoPaterno)
+            @Html.TextBoxFor(m => m.ApellidoPaterno, new { @class = "form-control", onkeypress = "ValidarTexto(event, this)" })
+        </div>
+
+        <div class="col-md-4 form-group ">
+            @Html.LabelFor(m => m.ApellidoMaterno)
+            @Html.TextBoxFor(m => m.ApellidoMaterno, new { @class = "form-control", onkeypress = "ValidarTexto(event, this)" })
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div>
+            @Html.Label("Correo electronico")
+        </div>
+        <div class="input-group mb-3">
+            <!-- Assuming you are using Font Awesome for the fa-envelope icon -->
+            <span class="input-group-text">
+                <i class="bi bi-envelope-at"></i>
+            </span>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-field", @placeholder = "Email Address", onblur = "ValidarCorreoBlur(this)" })
+        </div>
+
+
+        <div class="col-md-4 form-group mb-3">
+            @Html.LabelFor(m => m.Password)
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-lock"></i>
+                </span>
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password", onblur = "ValidacionPaswoord(this)" })
+            </div>
+        </div>
+
+        <div class="col-md-4 form-group mb-3">
+            @Html.LabelFor(m => m.UserName)
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-file-person"></i>
+                </span>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", onblur = "ValidarUseName(this)" })
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+}
