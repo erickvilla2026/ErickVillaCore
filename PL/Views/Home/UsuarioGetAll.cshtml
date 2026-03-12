@@ -31,6 +31,8 @@
                     <th scope="col">estatus</th>
                     <th scope="col">Rol</th>
                     <th scope="col">Imagen</th>
+                    <th scope="col"> datos </th>
+                   
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -88,6 +90,13 @@
                                 }
                             }
                         </td>
+
+                        <th>
+                            @usuario.Direccion.Colonia.Nombre,
+                            @usuario.Direccion.Colonia.Municipio.Nombre,
+                            @usuario.Direccion.Colonia.Nombre
+                        </th>
+
                     </tr>
                 }
             </tbody>

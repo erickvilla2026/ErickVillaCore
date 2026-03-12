@@ -43,7 +43,11 @@ public partial class PruebaConexionContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
+    public virtual DbSet<DTOs> DireccionDTO { get; set; } 
+
     public virtual DbSet<VwUsuarioGetAll> VwUsuarioGetAlls { get; set; }
+
+    public virtual DbSet<UsuarioGetAll> UsuarioGetAllDTO { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -66,6 +70,17 @@ public partial class PruebaConexionContext : DbContext
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Colonia)
                 .HasForeignKey(d => d.IdMunicipio)
                 .HasConstraintName("fk_municipio");
+        });
+
+        modelBuilder.Entity<DTOs>(entity =>
+        {
+            entity.HasNoKey();
+        });
+
+        modelBuilder.Entity<UsuarioGetAll>(entity =>
+        {
+            entity.HasNoKey();
+
         });
 
         modelBuilder.Entity<Departamento>(entity =>

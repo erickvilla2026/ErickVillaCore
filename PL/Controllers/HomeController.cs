@@ -84,7 +84,12 @@ namespace PL.Controllers
             ML.Result result = BL.Usuario.GetAll();
             ML.Usuario usuario = new ML.Usuario();
 
-            usuario.Usuarios = result.Objects; ;
+            //usuario.Direccion = new ML.Direccion();
+            //usuario.Direccion.Colonia = new ML.Colonia();
+            //usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+            //usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+            usuario.Usuarios = result.Objects;
 
             return View(usuario);
         }
@@ -101,30 +106,44 @@ namespace PL.Controllers
         {
 
             ML.Result result = BL.Usuario.GetById(IdUsuario);
-
             ML.Usuario usuario = new ML.Usuario();
 
-            ML.Usuario item = (ML.Usuario)result.Object;
-            
-            
-                usuario.IdUsuario = item.IdUsuario;
-                usuario.Nombre = item.Nombre;
-                usuario.ApellidoPaterno = item.ApellidoPaterno;
-                usuario.ApellidoMaterno = item.ApellidoMaterno;
-                usuario.Email = item.Email;
-                usuario.UserName = item.UserName;
-                usuario.Password = item.Password;
-                usuario.FechaNacimiento = item.FechaNacimiento; 
-                usuario.Sexo = item.Sexo;
-                usuario.Telefono = item.Telefono;
-                usuario.Celular = item.Celular;
-                usuario.CURP = item.CURP;
-                usuario.Estatus = item.Estatus;
+            usuario = (ML.Usuario)result.Object;
+
+            ML.Result result1 = BL.Estado.EstadoGetAll();
+            usuario.Direccion.Colonia.Municipio.Estado.Estados = result1.Objects;
 
 
-            
 
             return View(usuario);
+        }
+
+        public ActionResult EntidadGetAll()
+
+        {
+            ML.Result result1 = BL.Estado.EstadoGetAll();
+
+            ML.Estado estado = new ML.Estado();
+
+
+            foreach (ML.Estado itemEstado in result1.Objects)
+            {
+
+                estado.IdEstado = itemEstado.IdEstado;
+                estado.Nombre = itemEstado.Nombre;
+
+            }
+
+            return View();
+        }
+
+
+        public JsonResult EstadoGetByIdMunicipio (int IdEstado)
+        {
+
+            ML.Result result = BL.Municipio.EstadoGetByIdMunicipio(IdEstado);
+            return Json(result);
+
         }
 
 

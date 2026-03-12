@@ -34,5 +34,14 @@ namespace ML
         public string? ContentType { get; set; }
         public List<object> Correcto { get; set; } = new List<object>();
         public List<object> Error { get; set; } = new List<object>();
+
+
+        // propiedades de navegacion de
+
+        public Estado? Estado { get; set; }
+        public Municipio? Municipio { get; set; }
+        public Colonia? Colonia { get; set; }
     }
+
+
 }

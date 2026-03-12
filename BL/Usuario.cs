@@ -21,8 +21,10 @@ namespace BL
                 {
                     result.Objects = new List<object>();
 
-                    var getAll = context.Usuarios.FromSqlRaw("EXEC UsuarioGetAll").ToList();
-                    foreach (var item in getAll)
+                    var usuarioDTO = context.UsuarioGetAllDTO.FromSqlRaw("EXEC UsuarioGetAll").ToList();
+
+                    //var getAll = context.Usuarios.FromSqlRaw("EXEC UsuarioGetAll").ToList();
+                    foreach (var item in usuarioDTO)
                     {
                         ML.Usuario usuario = new ML.Usuario();
 
@@ -38,6 +40,24 @@ namespace BL
                         usuario.Celular = item.Celular;
                         usuario.CURP = item.Curp;
                         usuario.Estatus = item.Estatus;
+
+                        usuario.Direccion = new ML.Direccion();
+                        usuario.Direccion.Colonia = new ML.Colonia();
+                        usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                        usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+
+
+                        //usuario.Direccion.calle = item2.Calle;
+                        usuario.Direccion.NumeroExterior = item.NumeroExterior;
+                        usuario.Direccion.NumeroInterior = item.NumeroInterior;
+
+                        usuario.Direccion.Colonia.Nombre = item.Colonia;
+                        usuario.Direccion.Colonia.Municipio.Nombre = item.Municipio;
+                        usuario.Direccion.Colonia.Municipio.Estado.Nombre = item.Estado;
+
+                        //usuario.Direccion.Colonia.Municipio.Estado.IdEstado = item2.
+
 
                         result.Objects.Add(usuario);
                     }
@@ -60,7 +80,7 @@ namespace BL
                 using (DL.PruebaConexionContext context = new DL.PruebaConexionContext())
                 {
                     var usuarioGetByID = context.Usuarios.FromSqlRaw($"EXEC UsuarioGetById {Id}").ToList();
-                    foreach (var item in usuarioGetByID)
+                    foreach (DL.Usuario item in usuarioGetByID)
                     {
                         ML.Usuario usuario = new ML.Usuario();
 
@@ -71,11 +91,35 @@ namespace BL
                         usuario.Email = item.Email;
                         usuario.UserName = item.UserName;
                         usuario.Password = item.Password;
-                        usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime(TimeOnly.MinValue); usuario.Sexo = item.Sexo;
+                        usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime(TimeOnly.MinValue);
+                        usuario.Sexo = item.Sexo;
                         usuario.Telefono = item.Telefono;
                         usuario.Celular = item.Celular;
                         usuario.CURP = item.Curp;
                         usuario.Estatus = item.Estatus;
+
+                        usuario.Direccion = new ML.Direccion();
+                        usuario.Direccion.Colonia = new ML.Colonia();
+                        usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                        usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+
+                        var direccionesItem = context.DireccionDTO.FromSqlRaw($"EXEC DireccionGetByIdUsuario {usuario.IdUsuario}");
+
+
+                        foreach (var item1 in direccionesItem)
+                        {
+                            usuario.Direccion.Colonia.IdColonia = item1.IdColonia;
+                            usuario.Direccion.Colonia.Municipio.IdMunicipio = item1.IdMunicipio;
+                            usuario.Direccion.Colonia.Municipio.Estado.IdEstado = item1.IdEstado;
+                            Console.WriteLine(item1.Municipio);
+                        }
+
+
+                        
+
+
+
 
                         result.Object = usuario;
                     }
