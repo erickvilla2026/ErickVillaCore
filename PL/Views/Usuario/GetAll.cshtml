@@ -32,7 +32,7 @@
                     <th scope="col">Rol</th>
                     <th scope="col">Imagen</th>
                     <th scope="col"> datos </th>
-                   
+
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -40,7 +40,7 @@
                 {
                     <tr>
                         <th>
-                            <a class="btn btn-warning" href="@Url.Action("UsuarioForm", "Home", new { IdUsuario = usuario.IdUsuario })">
+                            <a class="btn btn-warning" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })">
                                 <i class="bi bi-pencil-square">Actualizar</i>
                             </a>
                         </th>
@@ -91,11 +91,21 @@
                             }
                         </td>
 
-                        <th>
-                            @usuario.Direccion.Colonia.Nombre,
-                            @usuario.Direccion.Colonia.Municipio.Nombre,
-                            @usuario.Direccion.Colonia.Nombre
-                        </th>
+
+
+                        @foreach (ML.Usuario usu in Model.Usuarios)
+                        {
+                            foreach (ML.Direccion item in usu.Direccion.Direcciones)
+                            {
+                            <td>
+                                @item.calle
+                                @item.NumeroExterior
+                                @item.NumeroInterior
+                            </td>
+                            }
+                        }
+
+
 
                     </tr>
                 }

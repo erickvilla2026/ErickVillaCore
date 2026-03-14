@@ -38,9 +38,7 @@ namespace ML
 
         // propiedades de navegacion de
 
-        public Estado? Estado { get; set; }
-        public Municipio? Municipio { get; set; }
-        public Colonia? Colonia { get; set; }
+     
     }
 
 

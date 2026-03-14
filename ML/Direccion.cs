@@ -13,5 +13,7 @@ namespace ML
         public string? NumeroInterior { get; set; }
         public string? NumeroExterior { get; set; }
         public Colonia? Colonia { get; set; }
+        public List<object>? Direcciones { get; set; }
+
     }
 }

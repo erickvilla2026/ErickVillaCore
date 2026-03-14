@@ -10,6 +10,7 @@ namespace BL
     public class Estado
     {
 
+        /*
         public static ML.Result EstadoGetAll()
         {
             ML.Result result = new ML.Result();
@@ -37,6 +38,6 @@ namespace BL
 
 
             return result;
-        }
+        } */
     }
 }

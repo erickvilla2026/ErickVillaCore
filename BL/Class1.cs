@@ -6,6 +6,8 @@ namespace BL
 {
     public class Class1
     {
+
+        /*
         public static ML.Result GetAll()
         {
             ML.Result result = new ML.Result();
@@ -100,6 +102,6 @@ namespace BL
             return result;
         }
 
-
+        */
     }
 }

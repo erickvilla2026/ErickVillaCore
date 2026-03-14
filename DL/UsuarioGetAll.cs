@@ -8,7 +8,6 @@ namespace DL
 {
     public class UsuarioGetAll
     {
-
         public int IdUsuario { get; set; }
 
         public string? Nombre { get; set; }
@@ -35,20 +34,18 @@ namespace DL
 
         public bool? Estatus { get; set; }
 
-        public int? IdRol { get; set; }
-
         public byte[]? Imagen { get; set; }
 
-        public string? Calle { get; set; }
+        public int? IdRol { get; set; }
 
-        public string? NumeroInterior { get; set; }
+        //public int IdDireccion { get; set; }
 
-        public string? NumeroExterior { get; set; }
+        //public string Calle { get; set; } = null!;
 
-        public string? Estado { get; set; }
+        //public string? NumeroInterior { get; set; }
 
-        public string? Municipio { get; set; }
+        //public string NumeroExterior { get; set; } = null!;
 
-        public string? Colonia { get; set; }
+
     }
 }

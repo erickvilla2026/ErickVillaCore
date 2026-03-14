@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 namespace BL
 {
     public class Usuario
+
     {
+
 
         public static ML.Result GetAll()
         {
@@ -35,37 +37,48 @@ namespace BL
                         usuario.Email = item.Email;
                         usuario.UserName = item.UserName;
                         usuario.Password = item.Password;
-                        usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime(TimeOnly.MinValue); usuario.Sexo = item.Sexo;
+                        usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime(TimeOnly.MinValue);
+                        usuario.Sexo = item.Sexo;
                         usuario.Telefono = item.Telefono;
                         usuario.Celular = item.Celular;
                         usuario.CURP = item.Curp;
                         usuario.Estatus = item.Estatus;
 
-                        usuario.Direccion = new ML.Direccion();
-                        usuario.Direccion.Colonia = new ML.Colonia();
-                        usuario.Direccion.Colonia.Municipio = new ML.Municipio();
-                        usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+
+                        var direccionesUsuario = context.UsuarioDireccionesDTO.FromSqlRaw($"UsuarioDirecciones {usuario.IdUsuario}").ToList();
+
+
+                        foreach (var usuarioDireccion in direccionesUsuario)
+                        {
+                            ML.Direccion direccion = new ML.Direccion();
+
+                            usuario.Direccion = new ML.Direccion();
+                            usuario.Direccion.Colonia = new ML.Colonia();
+                            usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                            usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+
+                            usuario.Direccion.Colonia.IdColonia = usuarioDireccion.IdColonia;
+                            usuario.Direccion.calle = usuarioDireccion.Calle;
+                            usuario.Direccion.NumeroExterior = usuarioDireccion.NumeroExterior;
+                            usuario.Direccion.NumeroInterior = usuarioDireccion.NumeroInterior;
+
+                            usuario.Direccion.Direcciones = new List<object>();
 
 
 
-                        //usuario.Direccion.calle = item2.Calle;
-                        usuario.Direccion.NumeroExterior = item.NumeroExterior;
-                        usuario.Direccion.NumeroInterior = item.NumeroInterior;
-
-                        usuario.Direccion.Colonia.Nombre = item.Colonia;
-                        usuario.Direccion.Colonia.Municipio.Nombre = item.Municipio;
-                        usuario.Direccion.Colonia.Municipio.Estado.Nombre = item.Estado;
-
-                        //usuario.Direccion.Colonia.Municipio.Estado.IdEstado = item2.
-
+                            usuario.Direccion.Direcciones?.Add(usuarioDireccion);
+                        }
 
                         result.Objects.Add(usuario);
+
+
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
             }
             return result;
         }
@@ -91,7 +104,7 @@ namespace BL
                         usuario.Email = item.Email;
                         usuario.UserName = item.UserName;
                         usuario.Password = item.Password;
-                        usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime(TimeOnly.MinValue);
+                        //usuario.FechaNacimiento = item.FechaNacimiento.ToDateTime;
                         usuario.Sexo = item.Sexo;
                         usuario.Telefono = item.Telefono;
                         usuario.Celular = item.Celular;
@@ -104,19 +117,19 @@ namespace BL
                         usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
 
 
-                        var direccionesItem = context.DireccionDTO.FromSqlRaw($"EXEC DireccionGetByIdUsuario {usuario.IdUsuario}");
+                        //var direccionesItem = context.DireccionDTO.FromSqlRaw($"EXEC DireccionGetByIdUsuario {usuario.IdUsuario}");
 
 
-                        foreach (var item1 in direccionesItem)
-                        {
-                            usuario.Direccion.Colonia.IdColonia = item1.IdColonia;
-                            usuario.Direccion.Colonia.Municipio.IdMunicipio = item1.IdMunicipio;
-                            usuario.Direccion.Colonia.Municipio.Estado.IdEstado = item1.IdEstado;
-                            Console.WriteLine(item1.Municipio);
-                        }
+                        //foreach (var item1 in direccionesItem)
+                        //{
+                        //    usuario.Direccion.Colonia.IdColonia = item1.IdColonia;
+                        //    usuario.Direccion.Colonia.Municipio.IdMunicipio = item1.IdMunicipio;
+                        //    usuario.Direccion.Colonia.Municipio.Estado.IdEstado = item1.IdEstado;
+                        //    Console.WriteLine(item1.Municipio);
+                        //}
 
 
-                        
+
 
 
 

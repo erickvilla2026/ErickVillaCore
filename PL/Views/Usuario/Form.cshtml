@@ -188,9 +188,8 @@
             console.log(ddlEstado);
 
         $.ajax({
-            url: '@Url.Action("EstadoGetByIdMunicipio", "Home")',
+            url: '@Url.Action("EstadoGetByIdMunicipio", "Home")?IdEstado='+ddlEstado,
             type: 'GET',
-            data: {IdEstado: ddlEstado},
             success: function(){
                 console.log("entro municipio")
             },
@@ -207,6 +206,7 @@
         console.log("Estado seleccionado:", idEstado);
     }
 </script>
+
 
 
 

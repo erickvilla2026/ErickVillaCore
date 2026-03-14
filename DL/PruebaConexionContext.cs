@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DL;
 
@@ -43,18 +44,28 @@ public partial class PruebaConexionContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    public virtual DbSet<DTOs> DireccionDTO { get; set; } 
-
     public virtual DbSet<VwUsuarioGetAll> VwUsuarioGetAlls { get; set; }
 
     public virtual DbSet<UsuarioGetAll> UsuarioGetAllDTO { get; set; }
 
+    public virtual DbSet<UsuarioDirecciones> UsuarioDireccionesDTO { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.; Database=PRUEBA_CONEXION; TrustServerCertificate=True; Trusted_Connection=True; User ID=sa; Password=pass@word1;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<UsuarioGetAll>(entity =>
+        {
+            entity.HasNoKey();
+        });
+
+        modelBuilder.Entity<UsuarioDirecciones>(entity =>
+        {
+            entity.HasNoKey();
+        });
+
+
         modelBuilder.Entity<Colonium>(entity =>
         {
             entity.HasKey(e => e.IdColonia).HasName("PK__Colonia__A1580F6695577296");
@@ -70,17 +81,6 @@ public partial class PruebaConexionContext : DbContext
             entity.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Colonia)
                 .HasForeignKey(d => d.IdMunicipio)
                 .HasConstraintName("fk_municipio");
-        });
-
-        modelBuilder.Entity<DTOs>(entity =>
-        {
-            entity.HasNoKey();
-        });
-
-        modelBuilder.Entity<UsuarioGetAll>(entity =>
-        {
-            entity.HasNoKey();
-
         });
 
         modelBuilder.Entity<Departamento>(entity =>

@@ -10,6 +10,7 @@ namespace BL
 {
     public class Municipio
     {
+        /*
         public static ML.Result EstadoGetByIdMunicipio(int? IdEstado)
         {
             ML.Result result = new ML.Result();
@@ -36,6 +37,6 @@ namespace BL
 
             return result;
         }
-
+        */
     }
 }

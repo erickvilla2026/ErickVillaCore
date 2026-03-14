@@ -27,7 +27,7 @@
     </thead>
     <tbody>
 
-        @foreach (ML.Captura captura in Model.Capturas)
+        @* @foreach (ML.Captura captura in Model.Capturas)
         {
         <tr>
             <th scope="row">1</th>
@@ -43,6 +43,6 @@
                 <td> @Html.ActionLink("eliminar", "Delete", "Home", new { Id = captura.Id }, new { @class = "btn btn-warning" }) </td>
         </tr>
             
-        }
+        } *@
     </tbody>
 </table>
